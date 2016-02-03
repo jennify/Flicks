@@ -10,15 +10,26 @@ import UIKit
 
 class DetailsViewController: UIViewController {
 
+    @IBOutlet weak var posterInfoView: UIView!
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var posterTitleLabel: UILabel!
-    @IBOutlet weak var posterTextView: UITextView!
+    @IBOutlet weak var posterOverviewLabel: UILabel!
+
+    @IBOutlet weak var posterScrollView: UIScrollView!
     
     var movie: NSDictionary!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        posterScrollView.contentSize = CGSize(width: posterScrollView.frame.size.width, height: posterInfoView.frame.origin.y + posterInfoView.frame.height)
+        
+
         posterTitleLabel.text = movie["title"] as? String
-        posterTextView.text = movie["overview"] as? String
+        
+        posterOverviewLabel.text = movie["overview"] as? String
+        
+        posterOverviewLabel.sizeToFit()
+        
         if let posterPath = movie["poster_path"] as? String{
             let baseUrl = "http://image.tmdb.org/t/p/w500/"
             let imageUrl = NSURL(string: baseUrl + posterPath)

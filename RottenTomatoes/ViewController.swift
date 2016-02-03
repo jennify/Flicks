@@ -19,9 +19,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         filmTableView.rowHeight = 200.0
-        UILabel.appearance().font = UIFont(name: "Avenir", size: 20)
-        UITextField.appearance().font = UIFont(name: "Avenir", size: 12)
-        
+
         let apiKey = "a85ab2b0491c1b28caf575c41ef6ccd7"
         let url = NSURL(string:"http://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
@@ -29,7 +27,6 @@ class ViewController: UIViewController, UITableViewDataSource {
         let task : NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: { (dataOrNil, response, error) in
             if let data = dataOrNil {
                 if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
-//                    print("response \(responseDictionary)")
                     self.movies = responseDictionary["results"] as! [NSDictionary]
                     self.filmTableView.reloadData()
                 }
