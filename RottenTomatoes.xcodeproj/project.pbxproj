@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7A78B5B71C60B5E80028DC7B /* FilmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A78B5B61C60B5E80028DC7B /* FilmCell.swift */; };
+		7AF9217F1C61E94900EBB909 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9217E1C61E94900EBB909 /* DetailsViewController.swift */; };
 		7AFE65001C6091F6005F6D00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFE64FF1C6091F6005F6D00 /* AppDelegate.swift */; };
 		7AFE65021C6091F6005F6D00 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFE65011C6091F6005F6D00 /* ViewController.swift */; };
 		7AFE65051C6091F6005F6D00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFE65031C6091F6005F6D00 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 		260E1416FABF2F802E56EB5F /* Pods_RottenTomatoes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RottenTomatoes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7918E7C9D0AD4C509637F5A3 /* Pods-RottenTomatoes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RottenTomatoes.release.xcconfig"; path = "Pods/Target Support Files/Pods-RottenTomatoes/Pods-RottenTomatoes.release.xcconfig"; sourceTree = "<group>"; };
 		7A78B5B61C60B5E80028DC7B /* FilmCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmCell.swift; sourceTree = "<group>"; };
+		7AF9217E1C61E94900EBB909 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		7AFE64FC1C6091F6005F6D00 /* RottenTomatoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RottenTomatoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFE64FF1C6091F6005F6D00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFE65011C6091F6005F6D00 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 		7A78B5B81C60B5EE0028DC7B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7AF9217E1C61E94900EBB909 /* DetailsViewController.swift */,
 				7AFE65011C6091F6005F6D00 /* ViewController.swift */,
 			);
 			name = ViewControllers;
@@ -232,6 +235,7 @@
 				7A78B5B71C60B5E80028DC7B /* FilmCell.swift in Sources */,
 				7AFE65021C6091F6005F6D00 /* ViewController.swift in Sources */,
 				7AFE65001C6091F6005F6D00 /* AppDelegate.swift in Sources */,
+				7AF9217F1C61E94900EBB909 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

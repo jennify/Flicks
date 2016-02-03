@@ -21,7 +21,7 @@ class FilmCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var overviewText: UITextView!
     @IBOutlet weak var cellLabel: UILabel!
     @IBOutlet weak var cellImage: UIImageView!
 
