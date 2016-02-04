@@ -11,7 +11,7 @@ MoviesTonight is a movies app using the [The Movie Database API](http://docs.the
 
 Time spent: **X** hours spent in total
 Day 1: 2 hours. (3 hours including video time)
-
+Day 2: 3 hours. (4 hours including video time)
 ## User Stories
 
 The following **required** functionality is completed:
