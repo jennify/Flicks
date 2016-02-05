@@ -2,11 +2,12 @@
 
 Flicks is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **X** hours spent in total
+Time spent: 10 hours spent in total
 Day 1: 3 hours.
 Day 2: 3 hours.
 Day 3: 2 hours.
-Day 4: 3 hours
+Day 4: 2 hours.
+
 ## User Stories
 
 The following **required** functionality is completed:
