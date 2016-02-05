@@ -1,6 +1,6 @@
-# Project 1 - MoviesTonight
+# Project 1 - Flicks
 
-MoviesTonight is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
+Flicks is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
 Time spent: **X** hours spent in total
 Day 1: 3 hours.
