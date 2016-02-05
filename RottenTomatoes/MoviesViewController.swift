@@ -10,55 +10,60 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource {
+class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var filmTableView: UITableView!
-
+    @IBOutlet weak var network_error_view: UIView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var movies : [NSDictionary]?
     var endpoint : String!
-    var network_problem : Bool!
-    var warning: UIView!
+    var filtered_movies: [NSDictionary]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        filmTableView.rowHeight = 200.0
-        self.network_problem = false
-
         
+        searchBar.delegate = self
+        filtered_movies = movies
+        
+        filmTableView.rowHeight = 200.0
+        
+        // Set up drag table view to refresh.
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         self.filmTableView.addSubview(refreshControl)
         
-        
+        // Populating first set of data.
         self.loadDataFromNetwork(true, refreshControl: nil)
-        
         
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let movie = self.movies![indexPath.row]
+        let movie = self.filtered_movies![indexPath.row]
         let title = movie["title"] as? String
         let overview = movie["overview"] as? String
         
-        
+        // Reload table view with new content.
         let cell = tableView .dequeueReusableCellWithIdentifier("com.codepath.examplecell") as!FilmCell
+        // Set selection color.
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor(red: 0.8, green: 0.0, blue: 0.0, alpha: 0.7)
+        cell.selectedBackgroundView = backgroundView
         cell.cellLabel.text = title
-        cell.overviewText.text = overview
+        cell.overviewLabel.text = overview
         
+        // Update image view in cell.
         if let posterPath = movie["poster_path"] as? String{
             let baseUrl = "http://image.tmdb.org/t/p/w500/"
             let imageUrl = NSURL(string: baseUrl + posterPath)
             cell.imageView?.setImageWithURL(imageUrl!)
         }
+        
         return cell
     }
     
-    func getRequest() {
-        
-    }
-
     func loadDataFromNetwork(has_hud: Bool, refreshControl: UIRefreshControl?) {
-        // ... Create the NSURLRequest (myRequest) ...
+
+        // Create the NSURLRequest
         let apiKey = "a85ab2b0491c1b28caf575c41ef6ccd7"
         let url = NSURL(string:"http://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
@@ -85,18 +90,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource {
                 // Use the new data to update the data source
                 if let data = dataOrNil {
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
-                        self.movies = responseDictionary["results"] as! [NSDictionary]
+                        self.movies = responseDictionary["results"] as? [NSDictionary]
+                        self.filtered_movies = self.movies
                         self.filmTableView.reloadData()
                     }
                 }
-                
+
                 // Set warning label for user if there is a network error.
                 if let _ = errorOrNil {
-                    self.network_problem = true
-                    self.warning.hidden = true
+                    self.network_error_view.hidden = false
                 } else {
-                    self.network_problem = false
-                    self.warning.hidden = true
+                    self.network_error_view.hidden = true
                 }
                 
                 // Reload the tableView now that there is new data
@@ -113,43 +117,56 @@ class MoviesViewController: UIViewController, UITableViewDataSource {
         self.loadDataFromNetwork(false, refreshControl: refreshControl)
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let movies = movies {
-            return movies.count
+        if let filtered_movies = self.filtered_movies {
+            return filtered_movies.count
         } else {
             return 0
         }
     }
     
-    
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 380, height: 30))
-        headerView.backgroundColor = UIColor(white: 0.2, alpha: 0.9)
-        warning = headerView
+    // This method updates filteredData based on the text in the Search Box
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
-        let warningLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 380, height: 30))
-        warningLabel.text = "Network Error!"
-        warningLabel.textColor = UIColor.whiteColor()
-        warningLabel.textAlignment = NSTextAlignment.Center
-        headerView.addSubview(warningLabel)
-
-        self.warning.hidden = !self.network_problem
+        // When there is no text, filteredData is the same as the original data
+        if searchText.isEmpty {
+            filtered_movies = movies
         
-        return headerView
+        } else {
+            // The user has entered text into the search box
+            // Use the filter method to iterate over all items in the data array
+            // For each item, return true if the item should be included and false if the
+            // item should NOT be included
+            
+            filtered_movies = movies!.filter({(dataItem: NSDictionary) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+                let title = dataItem["title"] as? String
+                if title!.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil {
+                    return true
+                } else {
+                    return false
+                }
+            })
+        }
+        self.filmTableView.reloadData()
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        // Pop up cancel button on search bar.
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        // Clear content on search bar.
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let cell = sender as! UITableViewCell
         let indexPath = filmTableView.indexPathForCell(cell)
-        let movie = movies![indexPath!.row]
+        let movie = filtered_movies![indexPath!.row]
         let detailsViewController = segue.destinationViewController as! DetailsViewController
         detailsViewController.movie = movie
     }
