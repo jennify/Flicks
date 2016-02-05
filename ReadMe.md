@@ -2,11 +2,7 @@
 
 Flicks is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: 10 hours spent in total
-Day 1: 3 hours.
-Day 2: 3 hours.
-Day 3: 2 hours.
-Day 4: 2 hours.
+Time spent: 9 hours spent in total
 
 ## User Stories
 
@@ -46,9 +42,19 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 
+- I tried embedding the search bar in the Navigation Bar but had issues.
+To work around this, I embedded a UIView and put a search bar inside of it.
+However, the search bar's dimensions were spilling out of the navigation bar
+so instead I opted for a new look.
+
+- Posters on the front page load very slowly. I was hoping to find a way to
+load the posters in some sort of order.
+
+- Wanted to finish the optional features but going to Tahoe this weekend :/
+
 ## License
 
-    Copyright [Jennifer lee] [name of copyright owner]
+    Copyright Jennifer lee
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
