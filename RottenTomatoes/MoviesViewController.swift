@@ -55,7 +55,26 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBar
         if let posterPath = movie["poster_path"] as? String{
             let baseUrl = "http://image.tmdb.org/t/p/w500/"
             let imageUrl = NSURL(string: baseUrl + posterPath)
-            cell.imageView?.setImageWithURL(imageUrl!)
+            
+            // Fade in image.
+            cell.imageView?.setImageWithURLRequest(
+                NSURLRequest(URL: imageUrl!),
+                placeholderImage: nil,
+                success: { (imageRequest, imageResponse, image) -> Void in
+                    if imageResponse != nil {
+                        // Fade in image that isn't cached
+                        cell.imageView?.alpha = 0.0
+                        cell.imageView?.image = image
+                        UIView.animateWithDuration(2, animations: { () -> Void in
+                            cell.imageView?.alpha = 1.0
+                        })
+                    } else {
+                        // Cached
+                        cell.imageView?.image = image
+                    }
+                },
+                failure: { (imageRequest, imageResponse, error) -> Void in
+            })
         }
         
         return cell
@@ -161,6 +180,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBar
         searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        
+        // Reload original data after cancelation of search.
+        self.filtered_movies = self.movies
+        self.filmTableView.reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

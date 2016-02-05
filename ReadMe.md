@@ -1,18 +1,12 @@
-# Rotten Tomatoes App
-
-`pod install` to install dependencies.
-
-.xcodeproj (original iOS project)
-.xcworkspace (cocoapod master project for dependencies)
-
 # Project 1 - MoviesTonight
 
 MoviesTonight is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
 Time spent: **X** hours spent in total
-Day 1: 2 hours. (3 hours including video time)
-Day 2: 3 hours. (4 hours including video time)
-Day 3: 1.5 hours.
+Day 1: 3 hours.
+Day 2: 3 hours.
+Day 3: 2 hours.
+Day 4: 3 hours
 ## User Stories
 
 The following **required** functionality is completed:
@@ -28,7 +22,7 @@ The following **optional** features are implemented:
 - [x] Add a tab bar for **Now Playing** and **Top Rated** movies.
 - [ ] Implement segmented control to switch between list view and grid view.
 - [x] Add a search bar.
-- [ ] All images fade in.
+- [x] All images fade in.
 - [ ] For the large poster, load the low-res image first, switch to high-res when complete.
 - [x] Customize the highlight and selection effect of the cell.
 - [x] Customize the navigation bar.
@@ -41,7 +35,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![Video Walkthrough](HW1-requiredFeatures.gif)
+![Video Walkthrough for Search](HW1-search.gif)
+![Video Walkthrough for Network Error](HW1-networkError.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -51,7 +47,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [Jennifer lee] [name of copyright owner]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
